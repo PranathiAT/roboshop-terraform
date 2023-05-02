@@ -1,12 +1,9 @@
 data "aws_ami" "centos" {
-  owners        = ["973714476881"]
-  most_recent   = true
+  most_recent = true
+  owners = ["973714476881"]
   name_regex    = "centos-8-DevOps-Practice"
 }
 
-output "ami" {
-  value = data.aws_ami.centos.image_id
-}
 
 
 resource "aws_instance" "frontend" {
