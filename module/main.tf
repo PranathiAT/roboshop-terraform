@@ -8,7 +8,7 @@ resource "aws_instance" "instance" {
   }
 }
 resource "null_resource" "provisioner" {
-  count = var.provisioner ? 1: 0
+#  count = var.provisioner ? 1: 0
   depends_on = [aws_instance.instance,aws_route53_record.records]
 
   provisioner "remote-exec" {
@@ -21,14 +21,11 @@ resource "null_resource" "provisioner" {
     }
 
 
-    inline = [
-      "rm -rf roboshop-shell" ,
-      "git clone https://github.com/PranathiAT/Roboshop-shell" ,
-      "cd Roboshop-shell",
-      "sudo bash ${var.component_name}.sh ${var.password}"
-    ]
+    inline =  var.app_type == "db" ? local.db_commands : local.app_commands
+
   }
 }
+
 
 
 resource "aws_route53_record" "records" {
@@ -37,4 +34,27 @@ resource "aws_route53_record" "records" {
   type    = "A"
   ttl     = 30
   records = [aws_instance.instance.private_ip]
+}
+
+
+resource "aws_iam_role" "role" {
+  name = "${var.component_name}-${var.env}-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  tags = {
+    tag-key = "${var.component_name}-${var.env}-role"
+  }
 }
