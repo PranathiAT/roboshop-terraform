@@ -3,7 +3,7 @@ locals {
   db_commands = [
     "rm -rf Roboshop-shell",
     "git clone https://github.com/PranathiAT/Roboshop-shell.git",
-    "cd roboshop-shell",
+    "cd Roboshop-shell",
     "sudo bash ${var.component_name}.sh ${var.password}"
   ]
   app_commands = [
