@@ -58,3 +58,5 @@ resource "aws_iam_role" "role" {
     tag-key = "${var.component_name}-${var.env}-role"
   }
 }
+
+
