@@ -29,6 +29,7 @@ resource "null_resource" "provisioner" {
 
 
 
+
 resource "aws_route53_record" "records" {
   zone_id = "Z0122249BD5X0ICWYE8"
   name    = "${var.component_name}-dev.pdevops.online"
