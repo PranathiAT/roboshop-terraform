@@ -14,6 +14,9 @@ resource "null_resource" "provisioner" {
 
   provisioner "remote-exec" {
 
+    triggers = {
+      private_ip = aws_instance.instance.private_ip
+    }
     connection {
       type     = "ssh"
       user     = "centos"
