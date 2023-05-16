@@ -68,28 +68,49 @@ resource "aws_iam_role_policy" "ssm-ps-policy" {
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
+
+
   policy = jsonencode(
     {
-      "Version": "2012-10-17",
-      "Statement": [
+      "Version" : "2012-10-17",
+      "Statement" : [
         {
-          "Sid": "VisualEditor0",
-          "Effect": "Allow",
-          "Action": [
+          "Sid" : "VisualEditor0",
+          "Effect" : "Allow",
+          "Action" : [
+            "kms:Decrypt",
             "ssm:GetParameterHistory",
             "ssm:GetParametersByPath",
             "ssm:GetParameters",
             "ssm:GetParameter"
           ],
-          "Resource": "arn:aws:ssm:us-east-1:141912740338:parameter/${var.env}.${var.component_name}.*"
-        },
-        {
-          "Sid": "VisualEditor1",
-          "Effect": "Allow",
-          "Action": "ssm:DescribeParameters",
-          "Resource": "*"
+          "Resource" : [
+            "arn:aws:kms:us-east-1:633788536644:key/df50dfa2-3f97-4213-b53f-deb991042c44",
+            "arn:aws:ssm:us-east-1:633788536644:parameter/${var.env}.${var.component_name}.*"
+          ]
         }
       ]
+
+#      "Version": "2012-10-17",
+#      "Statement": [
+#        {
+#          "Sid": "VisualEditor0",
+#          "Effect": "Allow",
+#          "Action": [
+#            "ssm:GetParameterHistory",
+#            "ssm:GetParametersByPath",
+#            "ssm:GetParameters",
+#            "ssm:GetParameter"
+#          ],
+#          "Resource": "arn:aws:ssm:us-east-1:141912740338:parameter/${var.env}.${var.component_name}.*"
+#        },
+#        {
+#          "Sid": "VisualEditor1",
+#          "Effect": "Allow",
+#          "Action": "ssm:Decrypt",
+#          "Resource": "*"
+#        }
+#      ]
     }
   )
 }
