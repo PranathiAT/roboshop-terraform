@@ -4,6 +4,8 @@ default_vpc_id = "vpc-059089f95b4c40848"
 default_vpc_cidr = "172.31.0.0/16"
 default_vpc_rtid = "rtb-0434ddc29d1e40bf0"
 kms_arn = "arn:aws:kms:us-east-1:141912740338:key/df50dfa2-3f97-4213-b53f-deb991042c44"
+domain_name = "pdevops.online"
+domain_id = "Z0122249BD5X0ICWYE8"
 vpc = {
   main = {
     cidr_block = "10.0.0.0/16"
@@ -42,6 +44,8 @@ app = {
     max_size = 10
     min_size = 1
     app_port = 80
+    listener_priority = 1
+    lb_type = "public"
   }
 
   catalogue = {
@@ -53,6 +57,8 @@ app = {
     max_size = 10
     min_size = 1
     app_port = 8080
+    listener_priority = 2
+    lb_type = "private"
   }
 #  cart = {
 #    name = "cart"
