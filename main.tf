@@ -106,7 +106,9 @@ module "app" {
   min_size = each.value["min_size"]
   app_port = each.value["app_port"]
   listener_priority = each.value["listener_priority"]
-  dns_name = lookup(var.app,each.value["dns_name"], "${each.value["name"]}-${var.env}")
+  dns_name = lookup(var.app,"dns_name", "${each.value["name"]}-${var.env}")
+
+
 
   env = var.env
   bastion_cidr = var.bastion_cidr
