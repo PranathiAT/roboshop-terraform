@@ -78,6 +78,7 @@ module "rabbitmq"{
   env = var.env
   vpc_id = local.vpc_id
   bastion_cidr = var.bastion_cidr
+  domain_id = var.domain_id
 }
 
 module "alb"{
