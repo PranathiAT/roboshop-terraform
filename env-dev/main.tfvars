@@ -98,7 +98,7 @@ app = {
     max_size = 10
     min_size = 1
     app_port = 8080
-    listener_priority = 2
+    listener_priority = 20
     lb_type = "private"
     parameters = ["rds"]
   }
