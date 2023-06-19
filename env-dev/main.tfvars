@@ -72,7 +72,7 @@ app = {
     max_size = 10
     min_size = 1
     app_port = 8080
-    listener_priority = 3
+    listener_priority = 30
     lb_type = "private"
     parameters = []
   }
