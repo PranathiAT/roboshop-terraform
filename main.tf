@@ -1,4 +1,4 @@
-module "vpc" {
+ module "vpc" {
   source= "git::https://github.com/PranathiAT/tf-module-vpc.git"
 
   for_each = var.vpc
